@@ -11,7 +11,7 @@ def possible_bipartition(dislikes)
   until queue.empty?
     current = remove_first_from_queue(queue)
     
-    until !dislikes[current].empty?
+    until !dislikes[current].empty? || current == (dislikes.length - 1)
       current += 1
     end
     
@@ -33,9 +33,8 @@ def possible_bipartition(dislikes)
       
     end
   end
-  
+
   return true
-  
 end
 
 def remove_first_from_queue(list)
