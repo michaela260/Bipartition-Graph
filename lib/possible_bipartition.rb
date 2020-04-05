@@ -1,4 +1,5 @@
 # Time Complexity: O(V+E) where V is the number of vertices and E is the number of Edges
+  # Note: Adding and deleting from unchecked_vertices does add a coefficient to the V
 # Space Complexity: O(n) where n is the number of vertices
 
 def possible_bipartition(dislikes)
@@ -8,11 +9,19 @@ def possible_bipartition(dislikes)
   first_group = Set[0]
   second_group = Set[]
   
-  until queue.empty?
-    current = remove_first_from_queue(queue)
-    
-    until !dislikes[current].empty? || current == (dislikes.length - 1)
-      current += 1
+  unchecked_vertices = []
+  i = 1
+  until i == dislikes.length
+    unchecked_vertices << i
+    i += 1
+  end
+
+  until queue.empty? && unchecked_vertices.empty?
+    if queue.empty?
+      current = unchecked_vertices.pop()
+    else
+      current = remove_first_from_queue(queue)
+      unchecked_vertices.delete(current)
     end
     
     dislikes[current].each do |neighbor|

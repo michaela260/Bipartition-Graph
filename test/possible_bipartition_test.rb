@@ -106,4 +106,21 @@ describe "possible_bipartition" do
     # Assert
     expect(answer).must_equal true
   end
+
+  it "will work for a disconnected graph" do
+    # Arrange
+    dislikes = [ [5],
+    [2, 3],
+    [1, 3],
+    [1, 2],
+    [],
+    [0],
+    []]
+    
+    # Act
+    answer = possible_bipartition(dislikes)
+    
+    # Assert
+    expect(answer).must_equal false
+  end
 end
